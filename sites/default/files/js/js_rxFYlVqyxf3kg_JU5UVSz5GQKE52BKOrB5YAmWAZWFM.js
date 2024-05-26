@@ -62,6 +62,68 @@ Drupal.debounce=function(func,wait,immediate){let timeout;let result;return func
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./js/src/components/NodeListOnly.jsx":
+/*!********************************************!*\
+  !*** ./js/src/components/NodeListOnly.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+//https://drupalize.me/tutorial/use-react-list-content-drupal
+
+var NoData = function NoData() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "No articles found.");
+};
+var NodeItem = function NodeItem(_ref) {
+  var drupal_internal__nid = _ref.drupal_internal__nid,
+    title = _ref.title;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "/node/".concat(drupal_internal__nid)
+  }, title));
+};
+var NodeListOnly = function NodeListOnly() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    content = _useState2[0],
+    setContent = _useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var API_ROOT = '/jsonapi/';
+    var url = "".concat(API_ROOT, "node/article?fields[node--article]=id,drupal_internal__nid,title,body&sort=-created&page[limit]=10");
+    var headers = new Headers({
+      Accept: 'application/vnd.api+json'
+    });
+    fetch(url, {
+      headers: headers
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      return setContent(data.data);
+    })["catch"](function (err) {
+      return console.log('There was an error accessing the API', err);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Site content"), content ? content.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(NodeItem, _extends({
+      key: item.id
+    }, item.attributes));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(NoData, null));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NodeListOnly);
+
+/***/ }),
+
 /***/ "./node_modules/react-dom/cjs/react-dom.development.js":
 /*!*************************************************************!*\
   !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
@@ -29990,6 +30052,38 @@ if (
 
 /***/ }),
 
+/***/ "./node_modules/react-dom/client.js":
+/*!******************************************!*\
+  !*** ./node_modules/react-dom/client.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+
+var m = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+if (false) {} else {
+  var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  exports.createRoot = function(c, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.createRoot(c, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+  exports.hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.hydrateRoot(c, h, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/react-dom/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/react-dom/index.js ***!
@@ -33547,12 +33641,29 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _components_NodeListOnly__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/NodeListOnly */ "./js/src/components/NodeListOnly.jsx");
 
 
 
-// # Example 1: Simple "Hello, World" code
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Hello there - world!"), document.getElementById('react-app'));
+/* Import Components */
+
+var Main = function Main() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NodeListOnly__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+};
+// Get the container for your app.
+var container = document.getElementById('react-app');
+
+// Check if the container exists to avoid null errors.
+if (container) {
+  // Create a root.
+  var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(container);
+
+  // Render the Main component.
+  root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Main, null));
+} else {
+  console.error('Failed to find the root element');
+}
 })();
 
 /******/ })()
